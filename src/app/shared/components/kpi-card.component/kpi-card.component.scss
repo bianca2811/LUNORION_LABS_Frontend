@@ -1,0 +1,97 @@
+$color-bg-card: #ffffff;
+$color-text-main: #1e293b;
+$color-text-muted: #64748b;
+$color-blue-positive: #3b82f6;
+$color-red-negative: #ef4444;
+$border-card: #e2e8f0;
+
+.kpi-card-container {
+  background-color: $color-bg-card;
+  border: 1px solid $border-card;
+  border-radius: 12px;
+  padding: 20px;
+  width: 100%;
+  max-width: 280px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  box-sizing: border-box;
+
+  .kpi-metrics-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+
+    .main-metric {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+
+      .kpi-title {
+        color: $color-text-main;
+        font-size: 13px;
+        font-weight: 600;
+        margin-bottom: 4px;
+      }
+
+      .kpi-value {
+        color: $color-text-main;
+        font-size: 28px;
+        font-weight: 700;
+        margin: 0;
+        line-height: 1;
+      }
+    }
+
+    .compare-metric {
+      display: flex;
+      flex-direction: column;
+      text-align: right;
+      font-size: 11px;
+
+      .compare-title, .gap-title {
+        color: $color-text-muted;
+        font-weight: 500;
+        margin-top: 2px;
+      }
+
+      .compare-value {
+        color: $color-text-main;
+        font-weight: 700;
+        font-size: 12px;
+      }
+
+      .gap-value {
+        font-weight: 600;
+        
+        &.positive { color: $color-blue-positive; }
+        &.negative { color: $color-red-negative; }
+      }
+    }
+  }
+
+  .kpi-divider {
+    border: none;
+    border-top: 1px dashed $border-card;
+    margin: 16px 0 12px 0;
+  }
+
+  .kpi-trend-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .trend-title {
+      color: $color-text-muted;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .sparkline-wrapper {
+      width: 120px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+    }
+  }
+}

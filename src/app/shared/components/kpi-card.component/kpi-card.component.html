@@ -1,0 +1,35 @@
+<div class="kpi-card-container">
+  <!-- Bloque Superior: Métricas e Indicadores -->
+  <div class="kpi-metrics-grid">
+    <div class="main-metric">
+      <span class="kpi-title">{{ title }}</span>
+      <h2 class="kpi-value">{{ mainValue }}</h2>
+    </div>
+    
+    <div class="compare-metric">
+      <span class="compare-title">{{ compareLabel }}</span>
+      <span class="compare-value">{{ compareValue }}</span>
+      
+      <span class="gap-title">GAP</span>
+      <span class="gap-value" [ngClass]="{ 'positive': isPositiveGap, 'negative': !isPositiveGap }">
+        {{ isPositiveGap ? '▲' : '▼' }} {{ gapValue }} ({{ gapPercentage }})
+      </span>
+    </div>
+  </div>
+
+  <!-- Separador punteado visual -->
+  <hr class="kpi-divider" />
+
+  <!-- Bloque Inferior: Gráfica Sparkline -->
+  <div class="kpi-trend-section">
+    <span class="trend-title">{{ trendLabel }}</span>
+    
+    <div class="sparkline-wrapper">
+      @if (svgPath) {
+        <svg width="100%" height="30" viewBox="0 0 120 30" preserveAspectRatio="none">
+          <path [attr.d]="svgPath" fill="none" [attr.stroke]="isPositiveGap ? '#3b82f6' : '#ef4444'" stroke-width="1.5" />
+        </svg>
+      }
+    </div>
+  </div>
+</div>
