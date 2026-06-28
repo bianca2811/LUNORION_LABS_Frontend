@@ -13,12 +13,10 @@ export class FormFieldComponent implements AfterContentInit, OnDestroy {
   @Input() errorMessage: string = '';
   @Input() hasError: boolean | null | undefined = false;
 
-  // Detecta el input nativo que se inyectará con la referencia #formInput desde las vistas
   @ContentChild('formInput', { static: false }) inputEl!: ElementRef<HTMLInputElement>;
 
   isFocused: boolean = false;
 
-  // Manejadores de eventos guardados para poder removerlos en el ciclo de vida OnDestroy
   private focusListener = () => this.isFocused = true;
   private blurListener = () => this.isFocused = false;
 

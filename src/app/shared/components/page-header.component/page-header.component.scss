@@ -1,0 +1,101 @@
+$bg-header: #0d1424;       
+$text-title: #ffffff;      
+$text-muted: #8a94a6;      
+$bg-input: #1e2640;        
+$color-purple: #4f46e5;    
+$color-purple-hover: #4338ca;
+
+.page-header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $bg-header;
+  padding: 16px 24px;
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, sans-serif;
+
+  .header-titles {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    .header-title {
+      color: $text-title;
+      font-size: 22px;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .header-subtitle {
+      color: $text-muted;
+      font-size: 14px;
+      margin: 0;
+    }
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    .search-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+
+      .search-icon {
+        position: absolute;
+        left: 12px;
+        font-size: 14px;
+        color: $text-muted;
+        pointer-events: none;
+      }
+
+      input {
+        background-color: $bg-input;
+        border: 1px solid transparent;
+        border-radius: 6px;
+        color: $text-title;
+        font-size: 14px;
+        padding: 10px 12px 10px 36px;
+        width: 240px;
+        outline: none;
+        transition: border-color 0.2s ease;
+
+        &::placeholder {
+          color: $text-muted;
+        }
+
+        &:focus {
+          border-color: rgba($color-purple, 0.5);
+        }
+      }
+    }
+
+    .btn-primary {
+      background-color: $color-purple;
+      border: none;
+      border-radius: 6px;
+      color: $text-title;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: $color-purple-hover;
+      }
+
+      .btn-icon {
+        font-size: 16px;
+        font-weight: 500;
+      }
+    }
+  }
+}

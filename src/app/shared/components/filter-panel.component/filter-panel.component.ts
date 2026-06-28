@@ -22,13 +22,11 @@ export class FilterPanelComponent implements OnInit {
     'Last 30 Days', 'This Month', 'Last Month', 'Custom Range'
   ];
 
-  // Variables dinámicas para los nombres de los meses y años correspondientes
   currentMonthLabel: string = '';
   nextMonthLabel: string = '';
   currentYear: number = new Date().getFullYear();
   nextYear: number = new Date().getFullYear();
 
-  // Matrices que almacenarán los días calculados dinámicamente
   currentMonthDays: (number | null)[] = [];
   nextMonthDays: (number | null)[] = [];
 
@@ -38,7 +36,6 @@ export class FilterPanelComponent implements OnInit {
     this.setDefaultDates();
   }
 
-  // Configura los strings de fechas iniciales por defecto (los últimos 7 días)
   setDefaultDates(): void {
     const end = new Date();
     const start = new Date();
@@ -48,16 +45,13 @@ export class FilterPanelComponent implements OnInit {
     this.endDate = this.formatDate(end);
   }
 
-  // Lógica matemática para construir la cuadrícula real del calendario
   generateCalendars(year: number, month: number): void {
     const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     
-    // 1. Configurar etiquetas del mes actual
     this.currentMonthLabel = monthNames[month];
     this.currentYear = year;
     this.currentMonthDays = this.getDaysForMonth(year, month);
 
-    // 2. Configurar etiquetas del mes siguiente
     let nextM = month + 1;
     let nextY = year;
     if (nextM > 11) {
@@ -69,18 +63,15 @@ export class FilterPanelComponent implements OnInit {
     this.nextMonthDays = this.getDaysForMonth(nextY, nextM);
   }
 
-  // Devuelve un arreglo con los días del mes, incluyendo nulos para los desfases del día de la semana
   getDaysForMonth(year: number, month: number): (number | null)[] {
     const days: (number | null)[] = [];
-    const firstDayIndex = new Date(year, month, 1).getDay(); // 0 = Domingo, 1 = Lunes, etc.
+    const firstDayIndex = new Date(year, month, 1).getDay();
     const totalDays = new Date(year, month + 1, 0).getDate();
 
-    // Rellenar espacios vacíos antes del primer día del mes
     for (let i = 0; i < firstDayIndex; i++) {
       days.push(null);
     }
 
-    // Rellenar los días reales del mes
     for (let day = 1; day <= totalDays; day++) {
       days.push(day);
     }
@@ -112,7 +103,7 @@ export class FilterPanelComponent implements OnInit {
       case 'Last Month':
         start.setMonth(start.getMonth() - 1);
         start.setDate(1);
-        end.setDate(0); // Último día del mes anterior
+        end.setDate(0);
         break;
     }
 
@@ -120,7 +111,6 @@ export class FilterPanelComponent implements OnInit {
     this.endDate = this.formatDate(end);
   }
 
-  // Helpers para dar formato estándar DD/MM/YYYY
   private formatDate(date: Date): string {
     const day = String(date.getDate()).padStart(2, '0');
     const month = String(date.getMonth() + 1).padStart(2, '0');
