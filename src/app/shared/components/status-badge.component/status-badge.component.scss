@@ -1,0 +1,55 @@
+.status-badge-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: system-ui, -apple-system, sans-serif;
+  border: 1px solid transparent;
+  width: fit-content;
+
+  .badge-icon {
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+  }
+
+  .badge-text {
+    line-height: 1;
+  }
+
+  &.connected {
+    background-color: #f0fdf4;
+    border-color: #bbf7d0;
+    color: #166534;
+  }
+
+  &.importing {
+    background-color: #f8fafc;
+    border-color: #e2e8f0;
+    color: #334155;
+    
+    .badge-icon {
+      animation: spin 2s linear infinite;
+    }
+  }
+
+  &.disabled {
+    background-color: #f1f5f9;
+    border-color: #cbd5e1;
+    color: #64748b;
+  }
+
+  &.attention {
+    background-color: #fef2f2;
+    border-color: #fca5a5;
+    color: #991b1b;
+  }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
