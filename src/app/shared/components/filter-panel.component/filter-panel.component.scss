@@ -1,0 +1,193 @@
+$color-border: #dcdcdc;
+$color-text: #333333;
+$color-muted: #999999;
+$color-blue-active: #007bff;
+$color-blue-light: #ebf5ff;
+$color-green-apply: #5cb85c;
+
+.filter-panel-card {
+  display: flex;
+  background-color: #ffffff;
+  border: 1px solid $color-border;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  width: fit-content;
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+
+  .calendar-section {
+    padding: 14px;
+    border-right: 1px solid $color-border;
+
+    .date-inputs-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 14px;
+
+      .input-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 180px;
+
+        .icon {
+          position: absolute;
+          left: 8px;
+          font-size: 13px;
+          color: $color-muted;
+        }
+
+        input {
+          width: 100%;
+          border: 1px solid $color-border;
+          border-radius: 4px;
+          padding: 6px 6px 6px 28px;
+          font-size: 13px;
+          color: $color-text;
+          outline: none;
+        }
+      }
+    }
+
+    .calendars-grid {
+      display: flex;
+      gap: 20px;
+
+      .calendar-box {
+        width: 190px;
+
+        .calendar-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 10px;
+
+          .nav-btn {
+            background: none;
+            border: none;
+            font-size: 14px;
+            cursor: pointer;
+            color: $color-text;
+            font-weight: bold;
+          }
+
+          .selectors {
+            font-size: 12px;
+            font-weight: bold;
+            color: #555555;
+            
+            .dropdown-mock {
+              border: 1px solid $color-border;
+              padding: 2px 6px;
+              border-radius: 3px;
+              margin: 0 2px;
+              background-color: #fafafa;
+            }
+          }
+        }
+
+        .week-days {
+          display: grid;
+          grid-template-columns: repeat(7, 1fr);
+          text-align: center;
+          font-size: 11px;
+          font-weight: bold;
+          color: #333333;
+          margin-bottom: 6px;
+        }
+
+        .days-grid {
+          display: grid;
+          grid-template-columns: repeat(7, 1fr);
+          row-gap: 2px;
+          text-align: center;
+          font-size: 12px;
+
+          span {
+            display: block;
+            padding: 4px 0;
+            color: $color-text;
+            cursor: pointer;
+
+            &.muted-day {
+              color: #cccccc;
+            }
+
+            &.selected-range {
+              background-color: $color-blue-light;
+            }
+
+            &.date-edge {
+              background-color: $color-blue-active !important;
+              color: #ffffff !important;
+              font-weight: bold;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .options-sidebar {
+    width: 140px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .quick-ranges {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+
+      .range-link {
+        background-color: #f7f9fa;
+        border: 1px solid transparent;
+        border-radius: 14px;
+        color: $color-blue-active;
+        text-align: left;
+        padding: 6px 12px;
+        font-size: 12px;
+        font-weight: 500;
+        cursor: pointer;
+        width: 100%;
+
+        &:hover {
+          background-color: #eef2f5;
+        }
+
+        &.active {
+          background-color: $color-blue-active;
+          color: #ffffff;
+        }
+      }
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 6px;
+      margin-top: 16px;
+
+      button {
+        flex: 1;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: bold;
+        padding: 6px 0;
+        cursor: pointer;
+        border: 1px solid $color-border;
+      }
+
+      .btn-apply {
+        background-color: $color-green-apply;
+        color: white;
+        border-color: darken($color-green-apply, 5%);
+      }
+
+      .btn-cancel {
+        background-color: #ffffff;
+        color: #666666;
+      }
+    }
+  }
+}

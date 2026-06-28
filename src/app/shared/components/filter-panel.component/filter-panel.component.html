@@ -1,0 +1,74 @@
+<div class="filter-panel-card">
+  <div class="calendar-section">
+    <div class="date-inputs-row">
+      <div class="input-container">
+        <span class="icon">📅</span>
+        <input type="text" [(ngModel)]="startDate" />
+      </div>
+      <div class="input-container">
+        <span class="icon">📅</span>
+        <input type="text" [(ngModel)]="endDate" />
+      </div>
+    </div>
+
+    <div class="calendars-grid">
+      <!-- Calendario 1: Dinámico Mes Actual -->
+      <div class="calendar-box">
+        <div class="calendar-header">
+          <button class="nav-btn">&lt;</button>
+          <div class="selectors">
+            <span class="dropdown-mock">{{ currentMonthLabel }} ▾</span>
+            <span class="dropdown-mock">{{ currentYear }} ▾</span>
+          </div>
+          <button class="nav-btn" style="visibility: hidden;">&gt;</button>
+        </div>
+        <div class="week-days">
+          <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+        </div>
+        <div class="days-grid">
+          @for (day of currentMonthDays; track $index) {
+            <span>{{ day ? day : '' }}</span>
+          }
+        </div>
+      </div>
+
+      <!-- Calendario 2: Dinámico Mes Siguiente -->
+      <div class="calendar-box">
+        <div class="calendar-header">
+          <button class="nav-btn" style="visibility: hidden;">&lt;</button>
+          <div class="selectors">
+            <span class="dropdown-mock">{{ nextMonthLabel }} ▾</span>
+            <span class="dropdown-mock">{{ nextYear }} ▾</span>
+          </div>
+          <button class="nav-btn">&gt;</button>
+        </div>
+        <div class="week-days">
+          <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+        </div>
+        <div class="days-grid">
+          @for (day of nextMonthDays; track $index) {
+            <span>{{ day ? day : '' }}</span>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="options-sidebar">
+    <div class="quick-ranges">
+      @for (range of ranges; track range) {
+        <button 
+          class="range-link" 
+          [class.active]="range === activeRange"
+          (click)="selectRange(range)">
+          {{ range }}
+        </button>
+      }
+    </div>
+
+    <div class="action-buttons">
+      <button class="btn-apply" (click)="applyFilter()">Apply</button>
+      <button class="btn-cancel" (click)="cancelFilter()">Cancel</button>
+    </div>
+  </div>
+</div>
