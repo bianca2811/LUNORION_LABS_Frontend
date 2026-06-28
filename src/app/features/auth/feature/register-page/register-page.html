@@ -1,0 +1,13 @@
+<div class="auth-page">
+  <div class="auth-card">
+    <div class="auth-brand">
+      <h1>Lunorion Labs</h1>
+      <p>Crear una cuenta nueva</p>
+    </div>
+    <app-register-form
+      [loading]="store.loading()"
+      [error]="store.error()"
+      (register)="onRegister($event)"
+    />
+  </div>
+</div>
