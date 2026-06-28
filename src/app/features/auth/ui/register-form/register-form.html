@@ -14,7 +14,7 @@
       <input
         id="name"
         type="text"
-        [(ngModel)]="name"
+        [ngModel]="name()" (ngModelChange)="name.set($event)"
         name="name"
         placeholder="Juan Pérez"
         required
@@ -26,7 +26,7 @@
       <input
         id="email"
         type="email"
-        [(ngModel)]="email"
+        [ngModel]="email()" (ngModelChange)="email.set($event)"
         name="email"
         placeholder="correo@ejemplo.com"
         required
@@ -39,7 +39,7 @@
       <input
         id="password"
         type="password"
-        [(ngModel)]="password"
+        [ngModel]="password()" (ngModelChange)="password.set($event)"
         name="password"
         placeholder="••••••••"
         required
@@ -52,13 +52,13 @@
       <input
         id="confirmPassword"
         type="password"
-        [(ngModel)]="confirmPassword"
+        [ngModel]="confirmPassword()" (ngModelChange)="confirmPassword.set($event)"
         name="confirmPassword"
         placeholder="••••••••"
         required
         autocomplete="new-password"
       />
-      @if (confirmPassword && password !== confirmPassword) {
+      @if (confirmPassword() && password() !== confirmPassword()) {
         <small class="field-error">Las contraseñas no coinciden</small>
       }
     </div>

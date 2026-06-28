@@ -1,4 +1,4 @@
-import { Component, input, output, signal } from '@angular/core';
+import { Component, input, output, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SidebarItem } from './sidebar-item.interface';
@@ -21,13 +21,13 @@ export class Sidebar {
   collapsed = signal(false);
   logout = output<void>();
 
-  get visibleItems() {
-    return this.items().filter(
+  visibleItems = computed(() =>
+    this.items().filter(
       item =>
         !item.permission ||
         this.permissions().includes(item.permission)
-    );
-  }
+    )
+  );
 
   toggleSidebar() {
     this.collapsed.set(!this.collapsed());

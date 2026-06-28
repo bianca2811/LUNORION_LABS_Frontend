@@ -14,7 +14,7 @@
       <input
         id="email"
         type="email"
-        [(ngModel)]="email"
+        [ngModel]="email()" (ngModelChange)="email.set($event)"
         name="email"
         placeholder="correo@ejemplo.com"
         required
@@ -27,7 +27,7 @@
       <input
         id="password"
         type="password"
-        [(ngModel)]="password"
+        [ngModel]="password()" (ngModelChange)="password.set($event)"
         name="password"
         placeholder="••••••••"
         required

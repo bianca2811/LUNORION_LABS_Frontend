@@ -1,8 +1,8 @@
-import { Injectable, signal, computed } from '@angular/core';
+import { Injectable, signal, computed, inject, DestroyRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { toObservable } from '@angular/core/rxjs-interop';
-import { environment } from '../../../environments/environment';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { tap } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
 
 export interface User {
   id: string;
@@ -26,6 +26,8 @@ export interface AuthResponse {
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly http = inject(HttpClient);
   private readonly apiUrl = `${environment.apiUrl}/auth`;
 
   readonly token = signal<string | null>(this.loadToken());
@@ -35,9 +37,11 @@ export class AuthService {
   readonly isAuthenticated = computed(() => !!this.token());
   readonly permissions = computed(() => this.user()?.permissions ?? []);
 
-  constructor(private http: HttpClient) {
+  constructor() {
     if (this.token()) {
-      this.loadUserProfile().subscribe();
+      this.loadUserProfile().pipe(
+        takeUntilDestroyed(this.destroyRef),
+      ).subscribe();
     }
   }
 

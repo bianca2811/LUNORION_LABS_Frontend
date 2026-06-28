@@ -1,10 +1,15 @@
-import { Injectable, signal, computed } from '@angular/core';
+import { Injectable, signal, computed, inject, DestroyRef } from '@angular/core';
 import { Router } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AuthService } from '../../../../core/auth/auth.service';
 import { LoginRequest } from '../../domain/models/login-request';
 
 @Injectable({ providedIn: 'root' })
 export class AuthStore {
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
+
   readonly loading = signal(false);
   readonly error = signal<string | null>(null);
 
@@ -13,16 +18,13 @@ export class AuthStore {
   readonly isAuthenticated = computed(() => this.authService.isAuthenticated());
   readonly permissions = computed(() => this.authService.permissions());
 
-  constructor(
-    private authService: AuthService,
-    private router: Router,
-  ) {}
-
   login(credentials: LoginRequest): void {
     this.loading.set(true);
     this.error.set(null);
 
-    this.authService.login(credentials).subscribe({
+    this.authService.login(credentials).pipe(
+      takeUntilDestroyed(this.destroyRef),
+    ).subscribe({
       next: () => {
         this.loading.set(false);
         this.router.navigate(['/dashboard']);
@@ -38,7 +40,9 @@ export class AuthStore {
     this.loading.set(true);
     this.error.set(null);
 
-    this.authService.register(data).subscribe({
+    this.authService.register(data).pipe(
+      takeUntilDestroyed(this.destroyRef),
+    ).subscribe({
       next: () => {
         this.loading.set(false);
         this.router.navigate(['/dashboard']);

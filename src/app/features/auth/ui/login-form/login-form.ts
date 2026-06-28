@@ -1,4 +1,4 @@
-import { Component, input, output } from '@angular/core';
+import { Component, input, output, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LoginRequest } from '../../domain/models/login-request';
@@ -16,11 +16,11 @@ export class LoginForm {
 
   login = output<LoginRequest>();
 
-  email = '';
-  password = '';
+  email = signal('');
+  password = signal('');
 
   onSubmit() {
-    if (!this.email || !this.password) return;
-    this.login.emit({ email: this.email, password: this.password });
+    if (!this.email() || !this.password()) return;
+    this.login.emit({ email: this.email(), password: this.password() });
   }
 }

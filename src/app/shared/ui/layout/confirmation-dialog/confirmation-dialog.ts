@@ -1,4 +1,4 @@
-import { Component, input, output } from '@angular/core';
+import { Component, input, output, computed } from '@angular/core';
 export type DialogType = 'info' | 'success' | 'warning' | 'danger';
 
 @Component({
@@ -17,7 +17,7 @@ export class ConfirmationDialog {
   confirm = output<void>();
   cancel = output<void>();
 
-  get iconClass(): string {
+  iconClass = computed(() => {
     switch (this.type()) {
       case 'info':
         return 'pi pi-info-circle';
@@ -34,7 +34,7 @@ export class ConfirmationDialog {
       default:
         return 'pi pi-exclamation-triangle';
     }
-  }
+  });
 
   onConfirm() {
     this.confirm.emit();

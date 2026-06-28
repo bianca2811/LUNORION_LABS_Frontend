@@ -1,4 +1,4 @@
-import { Component, input, output } from '@angular/core';
+import { Component, input, output, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -15,14 +15,14 @@ export class RegisterForm {
 
   register = output<{ email: string; password: string; name: string }>();
 
-  name = '';
-  email = '';
-  password = '';
-  confirmPassword = '';
+  name = signal('');
+  email = signal('');
+  password = signal('');
+  confirmPassword = signal('');
 
   onSubmit() {
-    if (!this.name || !this.email || !this.password) return;
-    if (this.password !== this.confirmPassword) return;
-    this.register.emit({ email: this.email, password: this.password, name: this.name });
+    if (!this.name() || !this.email() || !this.password()) return;
+    if (this.password() !== this.confirmPassword()) return;
+    this.register.emit({ email: this.email(), password: this.password(), name: this.name() });
   }
 }
