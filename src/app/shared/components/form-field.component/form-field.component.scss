@@ -1,0 +1,66 @@
+$color-default: #4a4a4a;
+$color-active: #2ecc71; 
+$color-error: #e74c3c;  
+$color-text: #ffffff;
+
+.form-field-container {
+  position: relative;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  font-family: sans-serif;
+
+  .form-field-label {
+    position: absolute;
+    top: -10px;
+    left: 12px;
+    background-color: #1e1e1e; // Cambia al color de fondo de tu app si es necesario
+    padding: 0 6px;
+    font-size: 12px;
+    color: $color-default;
+    transition: color 0.2s ease;
+    z-index: 2;
+  }
+
+  .input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: 1px solid $color-default;
+    border-radius: 8px;
+    padding: 14px 12px;
+    transition: border-color 0.2s ease;
+
+    ::ng-deep input {
+      width: 100%;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: $color-text;
+      font-size: 16px;
+    }
+  }
+
+  &.is-focused {
+    .form-field-label { color: $color-active; }
+    .input-wrapper { border-color: $color-active; }
+  }
+
+  &.has-error {
+    .form-field-label { color: $color-error; }
+    .input-wrapper { border-color: $color-error; }
+    
+    .error-icon {
+      color: $color-error;
+      margin-left: 8px;
+    }
+  }
+
+  .error-message {
+    color: $color-error;
+    font-size: 12px;
+    margin-top: 6px;
+    padding-left: 4px;
+  }
+}

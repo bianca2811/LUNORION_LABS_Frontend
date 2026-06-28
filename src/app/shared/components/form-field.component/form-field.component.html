@@ -1,0 +1,21 @@
+<div class="form-field-container" 
+     [class.is-focused]="isFocused" 
+     [class.has-error]="hasError">
+  
+  @if (label) {
+    <label class="form-field-label">{{ label }}</label>
+  }
+
+  <div class="input-wrapper">
+    <!-- Aquí se inyecta mágicamente el input que pusiste en el app.component.html -->
+    <ng-content></ng-content>
+
+    @if (hasError) {
+      <span class="error-icon" aria-hidden="true">⚠️</span>
+    }
+  </div>
+
+  @if (hasError && errorMessage) {
+    <span class="error-message">{{ errorMessage }}</span>
+  }
+</div>
