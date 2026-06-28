@@ -1,0 +1,13 @@
+<div class="auth-page">
+  <div class="auth-card">
+    <div class="auth-brand">
+      <h1>Lunorion Labs</h1>
+      <p>Panel de Administración</p>
+    </div>
+    <app-login-form
+      [loading]="store.loading()"
+      [error]="store.error()"
+      (login)="onLogin($event)"
+    />
+  </div>
+</div>

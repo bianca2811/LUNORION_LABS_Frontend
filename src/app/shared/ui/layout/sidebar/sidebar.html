@@ -20,7 +20,7 @@
   </div>
 
   <ul>
-    @for (item of visibleItems; track item.route) {
+    @for (item of visibleItems(); track item.route) {
       <li>
         <a
           [routerLink]="item.disabled ? null : item.route"

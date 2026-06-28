@@ -1,0 +1,20 @@
+<div class="dashboard-layout">
+  <app-sidebar
+    [items]="menuItems()"
+    [permissions]="permissions()"
+    (logout)="onLogout()"
+  />
+
+  <div class="dashboard-main">
+    <app-top-navbar
+      [userName]="userName()"
+      [userRole]="userRole()"
+    >
+      <app-breadcrumb [items]="[]" />
+    </app-top-navbar>
+
+    <main class="dashboard-content">
+      <router-outlet />
+    </main>
+  </div>
+</div>
