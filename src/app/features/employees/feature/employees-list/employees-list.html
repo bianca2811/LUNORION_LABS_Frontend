@@ -1,3 +1,145 @@
+<!-- // Original
 <div class="employees-list">
   <h2>Empleados - Listado</h2>
-</div>
+</div> -->
+
+
+// V1
+<div class="dashboard-container">
+  
+  <!-- Barra de Filtros Superior -->
+  <header class="filter-bar">
+    <div class="search-input">
+      <i class="icon-search"></i>
+      <input type="text" placeholder="Buscar por empleado">
+    </div>
+    <select class="filter-select">
+      <option value="">Estado</option>
+      <option value="Presente">Presente</option>
+      <option value="Tardanza">Tardanza</option>
+      <option value="Falta">Falta</option>
+    </select>
+    <input type="date" class="filter-date">
+    <button class="btn btn-filter">
+      <i class="icon-filter"></i> Filtrar
+    </button>
+  </header>
+
+  <!-- Encabezado de la Sección -->
+  <section class="section-header">
+    <div class="title-area">
+      <h1>Tablero de nómina</h1>
+      <p>Gestione la asistencia, genere boletas de pago y supervise las comisiones para el período actual.</p>
+    </div>
+    <div class="action-buttons">
+      <button class="btn btn-outline">
+        <i class="icon-export"></i> Exportar Reporte
+      </button>
+      <button class="btn btn-primary">
+        Convertir a excel o pdf
+      </button>
+    </div>
+  </section>
+
+  <!-- Rejilla Principal (Asistencia y Boletas) -->
+  <div class="main-grid">
+    
+    <!-- Bloque Izquierdo: Asistencia Diaria -->
+    <article class="card attendance-card">
+      <div class="card-header">
+        <h2><i class="icon-users"></i> Asistencia diaria</h2>
+        <span class="date-label">Hoy, Oct 24</span>
+      </div>
+      <div class="table-responsive">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Trabajador</th>
+              <th>Rol</th>
+              <th>Horario</th>
+              <th>Entrada</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- 🌟 Sincronizado en todas las líneas sin la 'l' errónea -->
+            <tr *ngFor="let item of asistenciaList">
+              <td>{{ item.trabajador }}</td>
+              <td>{{ item.rol }}</td>
+              <td>{{ item.horario }}</td>
+              <td>{{ item.entrada || '--:--' }}</td>
+              <td>
+                <span class="badge" [ngClass]="{
+                  'badge-present': item.estado === 'Presente',
+                  'badge-late': item.estado === 'Tardanza',
+                  'badge-absent': item.estado === 'Falta'
+                }">{{ item.estado }}</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </article>
+
+    <!-- Bloque Derecho: Boletas de Pago -->
+    <article class="card payroll-card">
+      <div class="card-header">
+        <h2><i class="icon-wallet"></i> Boletas de Pago</h2>
+      </div>
+      <div class="payroll-summary">
+        <span class="period-title">PERÍODO ACTUAL</span>
+        <h3>Oct 2023</h3>
+        <div class="progress-container">
+          <div class="progress-bar" [style.width.%]="progresoBoletas"></div>
+        </div>
+        <span class="progress-text">{{ progresoBoletas }}% Procesado</span>
+      </div>
+      
+      <div class="payroll-list">
+        <div class="payroll-item" *ngFor="let boleta of boletasList" [class.list-arrow]="boleta.estado_boleta === 'Borrador Editado'">
+          <div>
+            <p class="item-title">{{ boleta.trabajador }}</p>
+            <p class="item-sub" [class.success]="boleta.estado_boleta.includes('Firmado')">
+              {{ boleta.estado_boleta }}
+            </p>
+          </div>
+          <i *ngIf="boleta.estado_boleta.includes('Firmado')" class="icon-print"></i>
+        </div>
+      </div>
+
+      <button class="btn btn-block">Generar todos los borradores</button>
+    </article>
+
+  </div>
+
+  <!-- Bloque Inferior: Comisiones Técnicas -->
+  <section class="commissions-section">
+    <div class="section-title-row">
+      <h2><i class="icon-chart"></i> COMISIONES TÉCNICAS</h2>
+      <span class="badge-verified">PBAC Verified</span>
+    </div>
+    
+    <div class="commissions-grid">
+      <div class="comm-card" *ngFor="let comision of comisionesList" [class.top-worker]="comision.es_top">
+        <div class="comm-info">
+          <h3>
+            {{ comision.trabajador }} 
+            <span *ngIf="comision.es_top" class="badge-top">Top Trabajador</span>
+          </h3>
+          <p class="role">{{ comision.rol }}</p>
+          <p class="amount">S/ {{ comision.monto | number:'1.2-2' }}</p>
+          <p class="footer-text">{{ comision.servicios_terminados }} Servicios terminados</p>
+        </div>
+      </div>
+
+      <!-- Tarjeta estática para agregar más comisiones -->
+      <div class="comm-card add-card">
+        <div class="add-content">
+          <i class="icon-plus-circle"></i>
+          <span>Adjuntar comisiones</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div> lfmalfm
