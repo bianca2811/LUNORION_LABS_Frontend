@@ -12,6 +12,7 @@ export class NavigationService {
     { label: 'Inventario', icon: 'pi pi-box', route: '/dashboard/inventory' },
     { label: 'Citas', icon: 'pi pi-calendar', route: '/dashboard/appointments' },
     { label: 'Empleados', icon: 'pi pi-user', route: '/dashboard/employees' },
+    { label: 'Proveedores', icon: 'pi pi-truck', route: '/dashboard/suppliers' },
     { label: 'Reportes', icon: 'pi pi-chart-bar', route: '/dashboard/reports' },
     { label: 'Reclamos', icon: 'pi pi-exclamation-triangle', route: '/dashboard/claims' },
     { label: 'Ajustes', icon: 'pi pi-cog', route: '/dashboard/settings' },

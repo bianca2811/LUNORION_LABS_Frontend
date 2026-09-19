@@ -1,3 +1,166 @@
-<div class="clients-form">
-  <h2>Clientes - Formulario</h2>
+<div class="client-modal-overlay" (click)="closeClientModal()">
+  <div class="client-modal" (click)="$event.stopPropagation()">
+    <div class="client-modal__header">
+      <div>
+        <h2>Registrar Nuevo Cliente</h2>
+        <p>Completa la información del cliente.</p>
+      </div>
+      <button type="button" class="client-modal__close" (click)="closeClientModal()">
+        <i class="pi pi-times"></i>
+      </button>
+    </div>
+
+    <form [formGroup]="clientForm" (ngSubmit)="submitClient()">
+      <div class="client-modal__body">
+        <div class="client-modal__section">
+          <h3>Datos de contacto</h3>
+
+          <div class="client-form-grid">
+            <div class="client-form-field">
+              <label for="nombres">Nombres <span>*</span></label>
+              <input
+                id="nombres"
+                type="text"
+                formControlName="nombres"
+                [class.input-invalid]="isInvalid('nombres')"
+                placeholder="Ingresa los nombres"
+              />
+              @if (isInvalid('nombres')) {
+                <small class="field-error">{{ getErrorMessage('nombres') }}</small>
+              }
+            </div>
+
+            <div class="client-form-field">
+              <label for="apellidos">Apellidos <span>*</span></label>
+              <input
+                id="apellidos"
+                type="text"
+                formControlName="apellidos"
+                [class.input-invalid]="isInvalid('apellidos')"
+                placeholder="Ingresa los apellidos"
+              />
+              @if (isInvalid('apellidos')) {
+                <small class="field-error">{{ getErrorMessage('apellidos') }}</small>
+              }
+            </div>
+
+            <div class="client-form-field">
+              <label for="tipoDocumento">Tipo de documento <span>*</span></label>
+              <select id="tipoDocumento" formControlName="tipoDocumento">
+                <option value="DNI">DNI</option>
+                <option value="RUC">RUC</option>
+                <option value="CE">CE</option>
+              </select>
+            </div>
+
+            <div class="client-form-field">
+              <label for="numeroDocumento">N.º de documento <span>*</span></label>
+              <input
+                id="numeroDocumento"
+                type="text"
+                formControlName="numeroDocumento"
+                [class.input-invalid]="isInvalid('numeroDocumento')"
+                placeholder="Ingresa el documento"
+              />
+              @if (isInvalid('numeroDocumento')) {
+                <small class="field-error">{{ getErrorMessage('numeroDocumento') }}</small>
+              }
+            </div>
+
+            <div class="client-form-field">
+              <label for="email">Correo electrónico <span>*</span></label>
+              <input
+                id="email"
+                type="email"
+                formControlName="email"
+                [class.input-invalid]="isInvalid('email')"
+                placeholder="correo@ejemplo.com"
+              />
+              @if (isInvalid('email')) {
+                <small class="field-error">{{ getErrorMessage('email') }}</small>
+              }
+            </div>
+
+            <div class="client-form-field">
+              <label for="telefono">Teléfono <span>*</span></label>
+              <input
+                id="telefono"
+                type="tel"
+                formControlName="telefono"
+                [class.input-invalid]="isInvalid('telefono')"
+                placeholder="999 999 999"
+              />
+              @if (isInvalid('telefono')) {
+                <small class="field-error">{{ getErrorMessage('telefono') }}</small>
+              }
+            </div>
+
+            <div class="client-form-field client-form-field--full">
+              <label for="direccion">Dirección <span>*</span></label>
+              <input
+                id="direccion"
+                type="text"
+                formControlName="direccion"
+                [class.input-invalid]="isInvalid('direccion')"
+                placeholder="Ingresa la dirección"
+              />
+              @if (isInvalid('direccion')) {
+                <small class="field-error">{{ getErrorMessage('direccion') }}</small>
+              }
+            </div>
+          </div>
+        </div>
+
+        <div class="client-modal__section">
+          <h3>Datos fiscales</h3>
+
+          <div class="client-form-grid">
+            <div class="client-form-field client-form-field--full">
+              <label for="razonSocial">Razón social</label>
+              <input
+                id="razonSocial"
+                type="text"
+                formControlName="razonSocial"
+                placeholder="Ingresa la razón social si corresponde"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="client-consent">
+          <label>
+            <input type="checkbox" formControlName="consentimientoDatos" />
+            <span>
+              Autorizo el tratamiento de mis datos personales de acuerdo con la Ley 29733.
+            </span>
+          </label>
+
+          @if (isInvalid('consentimientoDatos')) {
+            <small class="field-error">{{ getErrorMessage('consentimientoDatos') }}</small>
+          }
+        </div>
+      </div>
+
+      <div class="client-modal__footer">
+        <button
+          type="button"
+          class="cancel-button"
+          [disabled]="isSaving"
+          (click)="closeClientModal()"
+        >
+          Cancelar
+        </button>
+
+        <button type="submit" class="save-button" [disabled]="clientForm.invalid || isSaving">
+          @if (isSaving) {
+            <i class="pi pi-spin pi-spinner"></i>
+            <span>Guardando...</span>
+          } @else {
+            <i class="pi pi-check"></i>
+            <span>Guardar cliente</span>
+          }
+        </button>
+      </div>
+    </form>
+  </div>
 </div>

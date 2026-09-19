@@ -14,6 +14,7 @@ export default [
       { path: 'inventory', loadChildren: () => import('../inventory/inventory.routes') },
       { path: 'appointments', loadChildren: () => import('../appointments/appointments.routes') },
       { path: 'employees', loadChildren: () => import('../employees/employees.routes') },
+      { path: 'suppliers', loadChildren: () => import('../suppliers/suppliers.routes') },
       { path: 'reports', loadChildren: () => import('../reports/reports.routes') },
       { path: 'claims', loadChildren: () => import('../claims/claims.routes') },
       { path: 'settings', loadChildren: () => import('../settings/settings.routes') },

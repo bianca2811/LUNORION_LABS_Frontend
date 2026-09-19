@@ -13,6 +13,16 @@ export interface User {
   permisos: string[];
 }
 
+export interface TenantInfo {
+  id: string;
+  ruc: string;
+  razonSocial: string;
+  nombreComercial: string;
+  logoUrl: string;
+  colorPrimario: string;
+  colorSecundario: string;
+}
+
 export interface LoginRequest {
   email: string;
   password: string;
@@ -24,6 +34,7 @@ export interface AuthResponse {
   tokenType: string;
   expiresIn: number;
   usuario: User;
+  tenant: TenantInfo;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -61,6 +72,7 @@ export class AuthService {
     this.token.set(null);
     this.user.set(null);
     localStorage.removeItem('auth_token');
+    localStorage.removeItem('tenant_id');
   }
 
   refreshToken() {
@@ -79,6 +91,7 @@ export class AuthService {
     this.token.set(res.token);
     this.user.set(res.usuario);
     localStorage.setItem('auth_token', res.token);
+    localStorage.setItem('tenant_id', res.tenant.id);
   }
 
   private loadToken(): string | null {

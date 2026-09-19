@@ -1,3 +1,97 @@
-<div class="clients-list">
-  <h2>Clientes - Listado</h2>
+<div class="clients-page">
+  <header class="clients-header">
+    <div class="clients-header__content">
+      <h1>Clientes</h1>
+
+      <p>Gestiona los clientes registrados en el taller.</p>
+    </div>
+
+    <div class="clients-header__actions">
+      <div class="export-dropdown">
+        <button type="button" class="export-button">
+          <i class="pi pi-download"></i>
+          <span>Exportar</span>
+          <i class="pi pi-chevron-down"></i>
+        </button>
+        <div class="export-menu">
+          <button type="button">
+            <i class="pi pi-file-pdf"></i>
+            Exportar a PDF
+          </button>
+          <button type="button">
+            <i class="pi pi-file"></i>
+            Exportar a XML
+          </button>
+        </div>
+      </div>
+      <button type="button" class="new-client-button" (click)="openClientModal()">
+        <i class="pi pi-plus"></i>
+        <span>Nuevo cliente</span>
+      </button>
+    </div>
+  </header>
+
+  <section class="clients-toolbar">
+    <div class="clients-search">
+      <i class="pi pi-search"></i>
+      <input type="text" placeholder="Buscar por nombre, documento o teléfono..." />
+    </div>
+
+    <div class="clients-filter">
+      <i class="pi pi-filter"></i>
+      <select>
+        <option value="">Todos los estados</option>
+        <option value="active">Activos</option>
+        <option value="inactive">Inactivos</option>
+      </select>
+    </div>
+  </section>
+
+  <section class="clients-table-card">
+    <div class="clients-table-wrapper">
+      <table class="clients-table">
+        <thead>
+          <tr>
+            <th>Cliente</th>
+            <th>Documento</th>
+            <th>Teléfono</th>
+            <th>Email</th>
+            <th>Vehículos</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="7">
+              <div class="clients-empty">
+                <div class="clients-empty__icon">
+                  <i class="pi pi-users"></i>
+                </div>
+                <h3>No hay clientes para mostrar</h3>
+                <p>Los clientes registrados aparecerán aquí cuando estén disponibles.</p>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <footer class="clients-table-footer">
+      <span> Mostrando 0 de 0 registros </span>
+      <div class="clients-pagination">
+        <button type="button" disabled aria-label="Página anterior">
+          <i class="pi pi-chevron-left"></i>
+        </button>
+        <span class="active-page"> 1 </span>
+        <button type="button" disabled aria-label="Página siguiente">
+          <i class="pi pi-chevron-right"></i>
+        </button>
+      </div>
+    </footer>
+  </section>
 </div>
+
+@if (showClientModal) {
+  <app-clients-form (closed)="closeClientModal()"></app-clients-form>
+}
