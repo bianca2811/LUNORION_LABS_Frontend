@@ -11,14 +11,14 @@
 
 // V1
 import { Routes } from '@angular/router';
-import { EmployeesList } from './feature/employees-list/employees-list';
+import { EmployeesListComponent  } from './feature/employees-list/employees-list';
 import { EmployeesForm } from './feature/employees-form/employees-form';
 import { EmployeesDetails } from './feature/employees-details/employees-details';
 
 export const EMPLOYEES_ROUTES: Routes = [
   {
     path: '',
-    component: EmployeesList
+    component: EmployeesListComponent 
   },
   {
     path: 'new',

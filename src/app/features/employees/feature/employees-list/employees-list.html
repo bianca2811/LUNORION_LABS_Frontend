@@ -4,10 +4,10 @@
 </div> -->
 
 
-// V1
+<!-- // V1
 <div class="dashboard-container">
   
-  <!-- Barra de Filtros Superior -->
+  // Barra de Filtros Superior
   <header class="filter-bar">
     <div class="search-input">
       <i class="icon-search"></i>
@@ -25,7 +25,7 @@
     </button>
   </header>
 
-  <!-- Encabezado de la Sección -->
+  // Encabezado de la Sección 
   <section class="section-header">
     <div class="title-area">
       <h1>Tablero de nómina</h1>
@@ -41,10 +41,10 @@
     </div>
   </section>
 
-  <!-- Rejilla Principal (Asistencia y Boletas) -->
+  // Rejilla Principal (Asistencia y Boletas)
   <div class="main-grid">
     
-    <!-- Bloque Izquierdo: Asistencia Diaria -->
+    // Bloque Izquierdo: Asistencia Diaria
     <article class="card attendance-card">
       <div class="card-header">
         <h2><i class="icon-users"></i> Asistencia diaria</h2>
@@ -62,7 +62,7 @@
             </tr>
           </thead>
           <tbody>
-            <!-- 🌟 Sincronizado en todas las líneas sin la 'l' errónea -->
+            // 🌟 Sincronizado en todas las líneas sin la 'l' errónea
             <tr *ngFor="let item of asistenciaList">
               <td>{{ item.trabajador }}</td>
               <td>{{ item.rol }}</td>
@@ -81,7 +81,7 @@
       </div>
     </article>
 
-    <!-- Bloque Derecho: Boletas de Pago -->
+    // Bloque Derecho: Boletas de Pago
     <article class="card payroll-card">
       <div class="card-header">
         <h2><i class="icon-wallet"></i> Boletas de Pago</h2>
@@ -112,7 +112,7 @@
 
   </div>
 
-  <!-- Bloque Inferior: Comisiones Técnicas -->
+  // Bloque Inferior: Comisiones Técnicas
   <section class="commissions-section">
     <div class="section-title-row">
       <h2><i class="icon-chart"></i> COMISIONES TÉCNICAS</h2>
@@ -132,7 +132,7 @@
         </div>
       </div>
 
-      <!-- Tarjeta estática para agregar más comisiones -->
+      // Tarjeta estática para agregar más comisiones
       <div class="comm-card add-card">
         <div class="add-content">
           <i class="icon-plus-circle"></i>
@@ -142,4 +142,274 @@
     </div>
   </section>
 
-</div> lfmalfm
+</div>
+
+<div class="dashboard-container">
+  // Barra Superior
+  <header class="top-bar">
+    <div class="breadcrumb">Inicio / Empleados</div>
+    <div class="user-profile">
+      <div class="notifications">
+        <i class="icon-bell"></i>
+        <span class="badge"></span>
+      </div>
+      <div class="profile-info">
+        <span class="avatar">JP</span>
+        <div class="user-text">
+          <span class="name">Juan Pancracio</span>
+          <span class="role">Administrador</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  // Contenido Principal
+  <main class="main-content">
+    <div class="content-header">
+      <div>
+        <h1>Listado de Empleados</h1>
+        <p class="subtitle">Administra y monitorea el historial de tus empleados.</p>
+      </div>
+      <div class="header-actions">
+        <button class="btn btn-secondary"><i class="icon-export"></i> Exportar</button>
+        <button class="btn btn-primary"><i class="icon-plus"></i> Nuevo Empleado</button>
+      </div>
+    </div>
+
+    // Tarjetas de Estadísticas
+    <section class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon icon-blue"><i class="icon-users"></i></div>
+        <div class="stat-data">
+          <span class="stat-label">TOTAL EMPLEADOS</span>
+          <span class="stat-value">1,248</span>
+          <span class="stat-trend trend-up">+12% este mes</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon icon-purple"><i class="icon-check-circle"></i></div>
+        <div class="stat-data">
+          <span class="stat-label">CUENTAS ACTIVAS</span>
+          <span class="stat-value">942</span>
+          <span class="stat-trend">75.4% del total</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon icon-orange"><i class="icon-clock"></i></div>
+        <div class="stat-data">
+          <span class="stat-label">EN ESPERA</span>
+          <span class="stat-value">42</span>
+          <span class="stat-trend">Pendientes de revisión</span>
+        </div>
+      </div>
+    </section>
+
+    // Filtros de Búsqueda
+    <section class="filters-bar">
+      <div class="search-input">
+        <i class="icon-search"></i>
+        <input type="text" placeholder="Texto para buscar...">
+      </div>
+      <div class="filter-select">
+        <select>
+          <option value="">Estado</option>
+          <option value="activo">Activo</option>
+          <option value="inactivo">Inactivo</option>
+        </select>
+      </div>
+      <div class="filter-date">
+        <input type="date">
+      </div>
+      <button class="btn btn-filter"><i class="icon-sliders"></i> Filtrar</button>
+    </section>
+
+    // Tabla de Datos
+    <section class="table-container">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Documento</th>
+            <th>Correo Electrónico</th>
+            <th>Teléfono</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let employee of employees">
+            <td class="col-name">
+              <span class="avatar-circle" [ngStyle]="{'background-color': employee.avatarBg}">
+                {{ employee.initials }}
+              </span>
+              <span>{{ employee.name }}</span>
+            </td>
+            <td>{{ employee.document }}</td>
+            <td class="text-muted">{{ employee.email }}</td>
+            <td>{{ employee.phone }}</td>
+            <td>
+              <span class="status-badge" [ngClass]="employee.statusClass">
+                {{ employee.status }}
+              </span>
+            </td>
+            <td class="actions">
+              <button class="btn-icon"><i class="icon-edit"></i></button>
+              <button class="btn-icon"><i class="icon-eye"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      // Paginación
+      <footer class="table-footer">
+        <span class="records-count">Mostrando 1 - 5 de 128 registros</span>
+        <div class="pagination">
+          <button class="page-nav" disabled>&lt;</button>
+          <button class="page-num active">1</button>
+          <button class="page-num">2</button>
+          <span class="dots">...</span>
+          <button class="page-num">9</button>
+          <button class="page-num">10</button>
+          <button class="page-nav">&gt;</button>
+        </div>
+      </footer>
+    </section>
+  </main>
+</div> -->
+
+
+// V2
+<div class="dashboard-container">
+  
+  <!-- Barra Superior -->
+  <header class="top-bar">
+    <div class="breadcrumb">Inicio / <strong>Empleados</strong></div>
+    <div class="user-profile">
+      <div class="notifications">
+        <svg xmlns="http://w3.org" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg>
+        <span class="badge"></span>
+      </div>
+      <div class="profile-info">
+        <span class="avatar">JP</span>
+        <div class="user-text">
+          <span class="name">Juan Pancracio</span>
+          <span class="role">Administrador</span>
+        </div>
+        <svg xmlns="http://w3.org" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenido Principal -->
+  <main class="main-content">
+    
+    <!-- Encabezado de la Sección -->
+    <div class="content-header">
+      <div>
+        <h1>Listado de Empleados</h1>
+        <p class="subtitle">Administra y monitorea el historial de tus empleados.</p>
+      </div>
+      <div class="header-actions">
+        <button class="btn btn-secondary">
+          <svg xmlns="http://w3.org" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" x2="12" y1="15" y2="3"></line></svg>
+          Exportar 
+          <svg xmlns="http://w3.org" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <button class="btn btn-primary">
+          <svg xmlns="http://w3.org" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><line x1="19" x2="19" y1="8" y2="14"></line><line x1="22" x2="16" y1="11" y2="11"></line></svg>
+          Nuevo Empleado
+        </button>
+      </div>
+    </div>
+
+    <!-- Filtros de Búsqueda -->
+    <section class="filters-bar">
+      <div class="search-input">
+        <input type="text" [(ngModel)]="searchQuery" placeholder="Texto">
+      </div>
+      
+      <div class="filter-select">
+        <select [(ngModel)]="selectedStatus">
+          <option value="">Estado</option>
+          <option value="activo">Activo</option>
+          <option value="en espera">En Espera</option>
+          <option value="inactivo">Inactivo</option>
+        </select>
+      </div>
+      
+      <div class="filter-actions-group">
+        <button class="btn btn-filter" (click)="applyFilters()">Filtrar</button>
+        <button class="btn btn-clear-filter" *ngIf="searchQuery || selectedStatus" (click)="clearFilters()">
+          Eliminar Filtro
+        </button>
+      </div>
+    </section>
+
+    <!-- Tabla de Datos -->
+    <section class="table-container">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Documento</th>
+            <th>Correo Electrónico</th>
+            <th>Teléfono</th>
+            <th>Estado</th>
+            <th class="text-center">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (employee of filteredEmployees; track employee.document) {
+            <tr>
+              <td class="col-name">
+                <span class="avatar-circle" [style.background-color]="employee.avatarBg">
+                  {{ employee.initials }}
+                </span>
+                <span class="employee-name-text">{{ employee.name }}</span>
+              </td>
+              <td class="text-semibold">{{ employee.document }}</td>
+              <td class="text-muted">{{ employee.email }}</td>
+              <td>{{ employee.phone }}</td>
+              <td>
+                <span class="status-badge" [ngClass]="employee.statusClass">
+                  {{ employee.status | uppercase }}
+                </span>
+              </td>
+              <td class="actions text-center">
+                <button class="btn-crud view" title="Ver">
+                  <svg xmlns="http://w3.org" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                </button>
+                <button class="btn-crud edit" title="Editar">
+                  <svg xmlns="http://w3.org" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg>
+                </button>
+                <button class="btn-crud delete" title="Eliminar">
+                  <svg xmlns="http://w3.org" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path></svg>
+                </button>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="6" class="empty-row">
+                No se encontraron registros con los filtros aplicados.
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+
+      <!-- Paginación -->
+      <footer class="table-footer">
+        <span class="records-count">Mostrando 1 - 5 de 128 registros</span>
+        <div class="pagination">
+          <button class="page-nav" disabled>&lt;</button>
+          <button class="page-num active">1</button>
+          <button class="page-num">2</button>
+          <span class="dots">...</span>
+          <button class="page-num">9</button>
+          <button class="page-num">10</button>
+          <button class="page-nav">&gt;</button>
+        </div>
+      </footer>
+    </section>
+  </main>
+</div>
