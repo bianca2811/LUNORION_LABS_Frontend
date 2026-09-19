@@ -1,3 +1,89 @@
+<!-- // Original
 <div class="employees-form">
   <h2>Empleados - Formulario</h2>
+</div> -->
+
+// V1
+<div class="form-page-container">
+  <div class="form-card">
+    
+    <!-- Encabezado del Formulario -->
+    <header class="form-header">
+      <h2>Registrar Nuevo Empleado</h2>
+      <button type="button" class="btn-close" (click)="regresarAlListado()">✕</button>
+    </header>
+
+    <!-- Cuerpo del Formulario -->
+    <form [formGroup]="employeeForm" (ngSubmit)="guardarEmpleado()" class="form-body">
+      
+      <!-- SECCIÓN: DATOS PERSONALES -->
+      <fieldset class="form-section">
+        <div class="form-group full-width">
+          <label>Nombre Completo <span class="required">*</span></label>
+          <input type="text" formControlName="name" placeholder="Ej. Alejandro Martínez">
+        </div>
+
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label>Correo Electrónico <span class="required">*</span></label>
+            <input type="email" formControlName="email" placeholder="contacto@empresa.com">
+          </div>
+          <div class="form-group">
+            <label>Teléfono Móvil / Fijo <span class="required">*</span></label>
+            <input type="text" formControlName="phone" placeholder="+51 987 654 321">
+          </div>
+        </div>
+
+        <div class="form-group full-width">
+          <label>Dirección de Domicilio</label>
+          <input type="text" formControlName="address" placeholder="Av. Principal 123, Distrito, Ciudad">
+        </div>
+
+        <div class="form-group full-width">
+          <label>Tipo de Empleado <span class="required">*</span></label>
+          <select formControlName="employeeType">
+            <option value="">Seleccionar tipo...</option>
+            <option value="Administrador">Administrador</option>
+            <option value="Técnico">Técnico</option>
+            <option value="Asistente">Asistente</option>
+          </select>
+        </div>
+      </fieldset>
+
+      <!-- SECCIÓN: DATOS FISCALES -->
+      <fieldset class="form-section">
+        <legend>DATOS FISCALES</legend>
+
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label>Tipo de Documento <span class="required">*</span></label>
+            <select formControlName="documentType">
+              <option value="">Seleccionar...</option>
+              <option value="DNI">DNI (Documento Nacional de Identidad)</option>
+              <option value="RUC">RUC (Registro Único de Contribuyentes)</option>
+              <option value="CE">Carnet de Extranjería</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Número de Documento <span class="required">*</span></label>
+            <input type="text" formControlName="documentNumber" placeholder="20123456789">
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- Acciones Inferiores -->
+      <footer class="form-actions">
+        <button type="button" class="btn btn-cancel" (click)="regresarAlListado()">Cancelar</button>
+        <button type="submit" class="btn btn-submit" [disabled]="employeeForm.invalid">
+          <svg xmlns="http://w3.org" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+            <polyline points="17 21 17 13 7 13 7 21"></polyline>
+            <polyline points="7 3 7 8 15 8"></polyline>
+          </svg>
+          Guardar Empleado
+        </button>
+      </footer>
+
+    </form>
+  </div>
 </div>

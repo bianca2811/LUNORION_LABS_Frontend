@@ -12,7 +12,7 @@
 // V1
 import { Routes } from '@angular/router';
 import { EmployeesListComponent  } from './feature/employees-list/employees-list';
-import { EmployeesForm } from './feature/employees-form/employees-form';
+import { EmployeesFormComponent } from './feature/employees-form/employees-form';
 import { EmployeesDetails } from './feature/employees-details/employees-details';
 
 export const EMPLOYEES_ROUTES: Routes = [
@@ -22,7 +22,7 @@ export const EMPLOYEES_ROUTES: Routes = [
   },
   {
     path: 'new',
-    component: EmployeesForm
+    component: EmployeesFormComponent
   },
   {
     path: ':id',
@@ -30,7 +30,7 @@ export const EMPLOYEES_ROUTES: Routes = [
   },
   {
     path: ':id/edit',
-    component: EmployeesForm
+    component: EmployeesFormComponent
   }
 ];
 

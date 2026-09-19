@@ -70,9 +70,11 @@ import { Component } from '@angular/core';
 
 
 // V2
+// *** V2 *** // ESTO ES IMPORTANTE: Importación de RouterLink integrada para habilitar la navegación al formulario
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router'; // 👈 Agregado para corregir error de compilación con routerLink
 
 interface Employee {
   name: string;
@@ -88,7 +90,7 @@ interface Employee {
 @Component({
   selector: 'app-employees-list',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink], // 👈 Añadido RouterLink aquí
   templateUrl: './employees-list.html',
   styleUrls: ['./employees-list.scss']
 })
