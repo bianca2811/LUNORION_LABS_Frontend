@@ -1,3 +1,125 @@
-<div class="employees-details">
+<!-- <div class="employees-details">
   <h2>Empleados - Detalles</h2>
+</div> -->
+
+
+// V1
+<!-- *** V3 *** // Vista de Detalles: Corrección definitiva de textos cambiando "Eliminar Cliente" por "Desactivar Empleado" -->
+<div class="dashboard-container">
+  
+  <!-- Barra Superior -->
+  <header class="top-bar">
+    <div class="breadcrumb">Inicio / Empleados / <strong>Detalles</strong></div>
+    <div class="user-profile">
+      <div class="profile-info">
+        <span class="avatar">JP</span>
+        <div class="user-text">
+          <span class="name">Juan Pancracio</span>
+          <span class="role">Administrador</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Contenido Principal -->
+  <main class="main-content" *ngIf="employee">
+    <div class="content-header">
+      <div>
+        <h1>Ficha de Empleado: {{ employee.name }}</h1>
+        <p class="subtitle">Monitorea los datos fiscales, operativos y estado de contratación.</p>
+      </div>
+      <div class="header-actions">
+        <button class="btn btn-secondary" (click)="regresarAlListado()">
+          Volver al Listado
+        </button>
+      </div>
+    </div>
+
+    <!-- Tarjeta de Información Detallada -->
+    <section class="details-card">
+      <div class="details-header-block">
+        <div class="avatar-large" [style.background-color]="employee.avatarBg">
+          {{ employee.initials }}
+        </div>
+        <div>
+          <h2>{{ employee.name }}</h2>
+          <span class="status-badge" [ngClass]="employee.statusClass">
+            {{ employee.status | uppercase }}
+          </span>
+        </div>
+      </div>
+
+      <div class="details-grid">
+        <div class="info-group">
+          <label>Documento de Identidad</label>
+          <p>{{ employee.document }}</p>
+        </div>
+        <div class="info-group">
+          <label>Correo Electrónico</label>
+          <p>{{ employee.email }}</p>
+        </div>
+        <div class="info-group">
+          <label>Teléfono de Contacto</label>
+          <p>{{ employee.phone }}</p>
+        </div>
+        <div class="info-group">
+          <label>Rol asignado del Sistema</label>
+          <p>Técnico Operativo de Taller</p>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- 🟥 CAPA DE LA MODAL (BACKDROP & WINDOW) -->
+<div class="modal-backdrop" *ngIf="isModalOpen">
+  <div class="modal-window">
+    
+    <!-- Encabezado con Icono de Advertencia -->
+    <div class="modal-body-content">
+      <div class="alert-icon-container">
+        <div class="warning-triangle">
+          <svg xmlns="http://w3.org" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path>
+            <line x1="12" x2="12" y1="9" y2="13"></line>
+            <line x1="12" x2="12.01" y1="17" y2="17"></line>
+          </svg>
+        </div>
+      </div>
+      
+      <div class="modal-text-block">
+        <!-- 🛠️ CORREGIDO DEFINITIVAMENTE: Título y descripción alineados con la desactivación lógica -->
+        <h3>Desactivar Empleado</h3>
+        <p class="modal-description">Estás a punto de desactivar a <strong>{{ employee?.name }}</strong>.</p>
+      </div>
+    </div>
+
+    <!-- Caja de Información / Alerta Informativa de Órdenes -->
+    <div class="info-alert-box">
+      <div class="info-icon">
+        <svg xmlns="http://w3.org" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" x2="12" y1="16" y2="12"></line>
+          <line x1="12" x2="12.01" y1="8" y2="8"></line>
+        </svg>
+      </div>
+      <div class="info-message">
+        Asegúrate de no tener órdenes de trabajo activas con este empleado.
+      </div>
+    </div>
+
+    <!-- Barra Inferior de Acciones -->
+    <footer class="modal-actions-footer">
+      <button type="button" class="btn-modal-cancel" (click)="cerrarModal()">Cancelar</button>
+      <button type="button" class="btn-modal-confirm" (click)="desactivarEmpleado()">
+        <svg xmlns="http://w3.org" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 6h18"></path>
+          <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+          <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+        </svg>
+        Desactivar Empleado
+      </button>
+    </footer>
+
+  </div>
 </div>

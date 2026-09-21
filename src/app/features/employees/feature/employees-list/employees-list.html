@@ -279,7 +279,7 @@
 
 
 // V2
-<!-- *** V2 *** // ESTO ES IMPORTANTE: Enrutamiento integrado para el botón Nuevo Empleado -->
+<!-- *** V5 *** // Enrutamiento por matriz de segmentos relativos sin barra inicial para compatibilidad con subrutas -->
 <div class="dashboard-container">
   
   <!-- Barra Superior -->
@@ -328,8 +328,8 @@
           </svg>
         </button>
         
-        <!-- Botón Modificado: Ahora redirige al formulario reactivo -->
-        <button class="btn btn-primary" routerLink="new">
+        <!-- Botón Nuevo Empleado: Enrutamiento relativo limpio -->
+        <button class="btn btn-primary" [routerLink]="['new']">
           <svg xmlns="http://w3.org" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
             <circle cx="9" cy="7" r="4"></circle>
@@ -395,25 +395,32 @@
                 </span>
               </td>
               <td class="actions text-center">
-                <button class="btn-crud view" title="Ver">
+                
+                <!-- 👁️ Botón Ver: Relativo sin barra inicial -->
+                <button class="btn-crud view" title="Ver" [routerLink]="[employee.document]">
                   <svg xmlns="http://w3.org" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
                     <circle cx="12" cy="12" r="3"></circle>
                   </svg>
                 </button>
-                <button class="btn-crud edit" title="Editar">
+
+                <!-- 📝 Botón Editar: Relativo sin barra inicial -->
+                <button class="btn-crud edit" title="Editar" [routerLink]="[employee.document, 'edit']">
                   <svg xmlns="http://w3.org" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M12 20h9"></path>
                     <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"></path>
                   </svg>
                 </button>
-                <button class="btn-crud delete" title="Eliminar">
+
+                <!-- 🗑️ Botón Tachito: Redirección relativa inyectando el queryParam modal='open' -->
+                <button class="btn-crud delete" title="Desactivar" [routerLink]="[employee.document]" [queryParams]="{ modal: 'open' }">
                   <svg xmlns="http://w3.org" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M3 6h18"></path>
                     <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
                     <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
                   </svg>
                 </button>
+
               </td>
             </tr>
           } @empty {
