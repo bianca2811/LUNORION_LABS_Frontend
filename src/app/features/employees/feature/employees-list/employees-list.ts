@@ -70,11 +70,10 @@ import { Component } from '@angular/core';
 
 
 // V2
-// *** V2 *** // ESTO ES IMPORTANTE: Importación de RouterLink integrada para habilitar la navegación al formulario
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router'; // 👈 Agregado para corregir error de compilación con routerLink
+import { RouterLink } from '@angular/router'; 
+import { FilterBarComponent, FilterOptions } from '../../../../shared/ui/layout/filter-bar/filter-bar';
 
 interface Employee {
   name: string;
@@ -90,7 +89,7 @@ interface Employee {
 @Component({
   selector: 'app-employees-list',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink], // 👈 Añadido RouterLink aquí
+  imports: [CommonModule, RouterLink, FilterBarComponent],
   templateUrl: './employees-list.html',
   styleUrls: ['./employees-list.scss']
 })
@@ -98,10 +97,6 @@ export class EmployeesListComponent implements OnInit {
 
   employees: Employee[] = [];
   filteredEmployees: Employee[] = [];
-
-  // Modelos de filtros vinculados
-  searchQuery: string = '';
-  selectedStatus: string = '';
 
   ngOnInit(): void {
     this.loadEmployees();
@@ -164,23 +159,21 @@ export class EmployeesListComponent implements OnInit {
     this.filteredEmployees = [...this.employees];
   }
 
-  applyFilters(): void {
+  applyFilters(filters: FilterOptions): void {
     this.filteredEmployees = this.employees.filter(employee => {
-      const matchesSearch = !this.searchQuery ? true : 
-        employee.name.toLowerCase().includes(this.searchQuery.toLowerCase()) || 
-        employee.email.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-        employee.document.toLowerCase().includes(this.searchQuery.toLowerCase());
+      const matchesSearch = !filters.text ? true : 
+        employee.name.toLowerCase().includes(filters.text.toLowerCase()) || 
+        employee.email.toLowerCase().includes(filters.text.toLowerCase()) ||
+        employee.document.toLowerCase().includes(filters.text.toLowerCase());
 
-      const matchesStatus = !this.selectedStatus ? true : 
-        employee.status === this.selectedStatus;
+      const matchesStatus = !filters.status ? true : 
+        employee.status.toLowerCase() === filters.status.toLowerCase();
 
       return matchesSearch && matchesStatus;
     });
   }
 
   clearFilters(): void {
-    this.searchQuery = '';
-    this.selectedStatus = '';
     this.filteredEmployees = [...this.employees];
   }
 }
